@@ -1,0 +1,29 @@
+{
+    "name": "madbyad/mpl-verify",
+    "description": "A PHP library that can be used for verifying form data input",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "Verification",
+        "Verifying",
+        "Verify"
+    ],
+    "autoload": {
+        "psr-4": {
+            "MadByAd\\MPLVerify\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MadByAd",
+            "email": "adityaaw84@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "PHP" : ">=7.0.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    }
+}
