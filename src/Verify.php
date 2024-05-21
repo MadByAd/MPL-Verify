@@ -23,4 +23,8 @@ namespace MadByAd\MPLVerify;
  */
 
 class Verify
-{}
+{
+
+    use VerifyFormat;
+
+}
