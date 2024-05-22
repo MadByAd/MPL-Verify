@@ -26,5 +26,6 @@ class Verify
 {
 
     use VerifyFormat;
+    use VerifyString;
 
 }
