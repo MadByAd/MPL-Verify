@@ -106,4 +106,86 @@ trait VerifyString
         return empty(preg_replace("/[0-9]/", "", $string));
     }
 
+    /**
+     * Check whether the given string is a valid day name e.g (Sunday, Monday)
+     *
+     * @param string $string The string to check
+     *
+     * @return bool `TRUE` if valid otherwise `FALSE`
+     */
+
+    public static function isDayName(string $string)
+    {
+        $day = [
+            "mondays",
+            "tuesdays",
+            "wednesdays",
+            "thursdays",
+            "fridays",
+            "saturdays",
+            "sundays",
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday",
+            "mon",
+            "tues",
+            "wed",
+            "thurs",
+            "fri",
+            "sat",
+            "sun",
+            "m",
+            "tue",
+            "w",
+            "th",
+            "f",
+            "s",
+        ];
+        return in_array(strtolower($string), $day);
+    }
+
+    /**
+     * Check whether the given string is a valid month name e.g (January, February)
+     *
+     * @param string $string The string to check
+     *
+     * @return bool `TRUE` if valid otherwise `FALSE`
+     */
+
+    public static function isMonthName(string $string)
+    {
+        $month = [
+            "january",
+            "february",
+            "march",
+            "april",
+            "may",
+            "june",
+            "july",
+            "august",
+            "september",
+            "october",
+            "november",
+            "december",
+            "jan",
+            "feb",
+            "mar",
+            "apr",
+            "may",
+            "jun",
+            "jul",
+            "aug",
+            "sep",
+            "sept",
+            "oct",
+            "nov",
+            "dec",
+        ];
+        return in_array(strtolower($string), $month);
+    }
+
 }
