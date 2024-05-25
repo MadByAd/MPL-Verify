@@ -28,5 +28,6 @@ class Verify
     use VerifyFormat;
     use VerifyInt;
     use VerifyString;
+    use VerifyVariable;
 
 }
