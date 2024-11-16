@@ -134,7 +134,7 @@ trait VerifyVariable
     {
         if(is_string($value)) {
             $value = strtolower($value);
-            return ($value === "1" || $value === "yes" || $value === "y");
+            return ($value === "1" || $value === "yes" || $value === "y" || $value == "true");
         }
         return ($value === 1);
     }
@@ -151,7 +151,7 @@ trait VerifyVariable
     {
         if(is_string($value)) {
             $value = strtolower($value);
-            return ($value === "0" || $value === "no" || $value === "n");
+            return ($value === "0" || $value === "no" || $value === "n" || $value == "false");
         }
         return ($value === 0);
     }

@@ -36,7 +36,7 @@ trait VerifyString
     public static function length(string $string, int $maximum = 0, int $minimum = 0)
     {
         $length = strlen($string);
-        return ($string >= $minimum && $string <= $maximum);
+        return ($length >= $minimum && $length <= $maximum);
     }
 
     /**
@@ -53,6 +53,19 @@ trait VerifyString
     }
 
     /**
+     * Check whether the given string does NOT have a whitespace
+     *
+     * @param string $string The string to check
+     *
+     * @return bool `TRUE` if contain whitespace otherwise `FALSE`
+     */
+
+    public static function doesntHaveWhitespace(string $string)
+    {
+        return preg_match("/[\s]/", $string) != 1;
+    }
+
+    /**
      * Check whether the given string is alphabetical.
      * only contains alphabetical character which is A-Z
      *
@@ -65,9 +78,9 @@ trait VerifyString
     public static function isAlphabetical(string $string, bool $allowWhitespace = false)
     {
         if($allowWhitespace) {
-            return empty(preg_replace("/[a-ZA-Z\s]/", "", $string));
+            return empty(preg_replace("/[a-zA-Z\s]/", "", $string));
         }
-        return empty(preg_replace("/[a-ZA-Z]/", "", $string));
+        return empty(preg_replace("/[a-zA-Z]/", "", $string));
     }
 
     /**
@@ -83,9 +96,9 @@ trait VerifyString
     public static function isAlphanumeric(string $string, bool $allowWhitespace = false)
     {
         if($allowWhitespace) {
-            return empty(preg_replace("/[a-ZA-Z0-9\s]/", "", $string));
+            return empty(preg_replace("/[a-zA-Z0-9\s]/", "", $string));
         }
-        return empty(preg_replace("/[a-ZA-Z0-9]/", "", $string));
+        return empty(preg_replace("/[a-zA-Z0-9]/", "", $string));
     }
 
     /**
