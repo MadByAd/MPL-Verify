@@ -12,8 +12,6 @@
 
 namespace MadByAd\MPLVerify;
 
-use XMLReader;
-
 /**
  *
  * The VerifyVariable trait is used for verifying other types of variables
@@ -159,14 +157,31 @@ trait VerifyVariable
     /**
      * Check whether the given string is a valid JSON
      *
-     * @param string $json The JSON to check
+     * @param string $json                 The JSON to check
+     * @param bool   $acceptOtherQuotation If `TRUE` then accepts quotation other than `"`
      *
      * @return bool `TRUE` if valid otherwise `FALSE`
      */
 
-    public static function isJSON(string $json)
+    public static function isJSON(string $json, bool $acceptOtherQuotation = true)
     {
+        if($acceptOtherQuotation) {
+            $json = str_replace(["'", "`"], "\"", $json);
+        }
         return (json_decode($json, true) !== null);
+    }
+
+    /**
+     * Check whether the given string is a valid XML document
+     *
+     * @param string $xml The XML document to check
+     *
+     * @return bool `TRUE` if valid otherwise `FALSE`
+     */
+
+    public static function isXML(string $xml)
+    {
+        return (xml_parse(xml_parser_create(), $xml) === 1);
     }
 
 }

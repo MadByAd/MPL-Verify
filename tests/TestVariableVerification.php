@@ -64,4 +64,21 @@ final class TestVariableVerification extends TestCase
         $this->assertFalse(Verify::isFalse("grape"));
     }
 
+    public function testVerifyJsonValidity()
+    {
+        $this->assertTrue(Verify::isJSON("{\"name\":\"aditya\",\"age\":16}"));
+        $this->assertTrue(Verify::isJSON("{`name`:`aditya`,`age`:16}"));
+        $this->assertTrue(Verify::isJSON("{'name':'aditya','age':16}"));
+        $this->assertFalse(Verify::isJSON("{'name':'aditya','age':16}", false));
+        $this->assertFalse(Verify::isJSON("{\"name\"\"aditya\",\"age\":16}"));
+        $this->assertFalse(Verify::isJSON("\"name\":\"aditya\",\"age\":16}"));
+        $this->assertFalse(Verify::isJSON("{name:\"aditya\",\"age\":16}"));
+    }
+
+    public function testVerifyXmlValidity()
+    {
+        $this->assertTrue(Verify::isXML("<people><name>Adit</name><age>16</age></people>"));
+        $this->assertFalse(Verify::isXML("<people><name>Adit<name><age>16<age></people>"));
+    }
+
 }
