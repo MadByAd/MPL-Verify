@@ -24,6 +24,67 @@ trait VerifyString
 {
 
     /**
+     * Check whether the string is all UPPERCASE character
+     *
+     * @param string $string The string to check
+     * @param bool   $allowWhitespace If `TRUE` then whitespace is allowed
+     *
+     * @return bool `TRUE` if valid otherwise `FALSE`
+     */
+
+    public static function isUppercased(string $string, bool $allowWhitespace = false)
+    {
+        if($allowWhitespace) {
+            return empty(preg_replace("/[^a-z]/", "", $string));
+        }
+        return empty(preg_replace("/[^a-z\s]/", "", $string));
+    }
+
+    /**
+     * Check whether the given string has uppercase character
+     *
+     * @param string $string The string to check
+     *
+     * @return bool `TRUE` if contain alphabetical characters otherwise `FALSE`
+     */
+
+    public static function hasUppercase(string $string)
+    {
+        return preg_match("/[A-Z]/", $string) == 1;
+    }
+
+    /**
+     * Check whether the string is all LOWERCASE character
+     *
+     * @param string $string The string to check
+     * @param bool   $allowWhitespace If `TRUE` then whitespace is allowed
+     *
+     * @return bool `TRUE` if valid otherwise `FALSE`
+     */
+
+    public static function isLowercased(string $string, bool $allowWhitespace = false)
+    {
+        if($allowWhitespace) {
+            return empty(preg_replace("/[^A-Z]/", "", $string));
+        }
+        return empty(preg_replace("/[^A-Z\s]/", "", $string));
+    }
+
+    /**
+     * Check whether the given string has lowercase character
+     *
+     * @param string $string The string to check
+     *
+     * @return bool `TRUE` if contain alphabetical characters otherwise `FALSE`
+     */
+
+    public static function hasLowercase(string $string)
+    {
+        return preg_match("/[a-z]/", $string) == 1;
+    }
+
+
+    /**
      * Check whether the given string is has the valid length
      *
      * @param string $string  The string to check
@@ -84,6 +145,38 @@ trait VerifyString
     }
 
     /**
+     * Check whether the given string has alphabetical character
+     * contains alphabetical character which is A-Z
+     *
+     * @param string $string The string to check
+     *
+     * @return bool `TRUE` if contain alphabetical characters otherwise `FALSE`
+     */
+
+    public static function hasAlphabetical(string $string)
+    {
+        return preg_match("/[a-zA-Z]/", $string) == 1;
+    }
+
+    /**
+     * Check whether the given string does NOT have alphabetical characters.
+     * doesn't contains alphabetical character which is A-Z
+     *
+     * @param string $string          The string to check
+     * @param bool   $allowWhitespace If `TRUE` then whitespace is allowed
+     *
+     * @return bool `TRUE` if valid otherwise `FALSE`
+     */
+
+    public static function doesntHaveAlphabetical(string $string, bool $allowWhitespace = false)
+    {
+        if($allowWhitespace) {
+            return empty(preg_replace("/[^a-zA-Z]/", "", $string));
+        }
+        return empty(preg_replace("/[^a-zA-Z\s]/", "", $string));
+    }
+
+    /**
      * Check whether the given string is alphanumeric.
      * only contains alphanumeric character which is A-Z and 0-9
      *
@@ -102,6 +195,38 @@ trait VerifyString
     }
 
     /**
+     * Check whether the given string has alphanumeric character
+     * contains alphanumeric character which is A-Z and 0-9
+     *
+     * @param string $string The string to check
+     *
+     * @return bool `TRUE` if contain alphanumeric characters otherwise `FALSE`
+     */
+
+    public static function hasAlphanumeric(string $string)
+    {
+        return preg_match("/[a-zA-Z0-9]/", $string) == 1;
+    }
+
+    /**
+     * Check whether the given string does NOT have alphanumeric characters.
+     * doesn't contains alphanumeric character which is A-Z and 0-9
+     *
+     * @param string $string          The string to check
+     * @param bool   $allowWhitespace If `TRUE` then whitespace is allowed
+     *
+     * @return bool `TRUE` if valid otherwise `FALSE`
+     */
+
+    public static function doesntHaveAlphanumeric(string $string, bool $allowWhitespace = false)
+    {
+        if($allowWhitespace) {
+            return empty(preg_replace("/[^a-zA-Z0-9]/", "", $string));
+        }
+        return empty(preg_replace("/[^a-zA-Z0-9\s]/", "", $string));
+    }
+
+    /**
      * Check whether the given string is numeric.
      * only contains numeric character which is 0-9
      *
@@ -117,6 +242,83 @@ trait VerifyString
             return empty(preg_replace("/[0-9\s]/", "", $string));
         }
         return empty(preg_replace("/[0-9]/", "", $string));
+    }
+
+    /**
+     * Check whether the given string has numeric character
+     * contains numeric character which is 0-9
+     *
+     * @param string $string The string to check
+     *
+     * @return bool `TRUE` if contain numeric character otherwise `FALSE`
+     */
+
+    public static function hasNumeric(string $string)
+    {
+        return preg_match("/[0-9]/", $string) == 1;
+    }
+
+    /**
+     * Check whether the given string does NOT have numeric characters.
+     * doesn't contains numeric character which is 0-9
+     *
+     * @param string $string          The string to check
+     * @param bool   $allowWhitespace If `TRUE` then whitespace is allowed
+     *
+     * @return bool `TRUE` if valid otherwise `FALSE`
+     */
+
+    public static function doesntHaveNumeric(string $string, bool $allowWhitespace = false)
+    {
+        if($allowWhitespace) {
+            return empty(preg_replace("/[^0-9]/", "", $string));
+        }
+        return empty(preg_replace("/[^0-9\s]/", "", $string));
+    }
+
+    /**
+     * Check whether the given string contains special characters.
+     * only contains special character which is character other than the alphanumeric characters
+     *
+     * @param string $string          The string to check
+     * @param bool   $allowWhitespace If `TRUE` then whitespace is allowed
+     *
+     * @return bool `TRUE` if valid otherwise `FALSE`
+     */
+
+    public static function containsSpecialChar(string $string, bool $allowWhitespace = false)
+    {
+        return self::doesntHaveAlphanumeric($string, $allowWhitespace);
+    }
+
+    /**
+     * Check whether the given string has a special characters.
+     * contains special character which is character other than the alphanumeric characters
+     *
+     * @param string $string          The string to check
+     * @param bool   $allowWhitespace If `TRUE` then whitespace is allowed
+     *
+     * @return bool `TRUE` if contains special characters otherwise `FALSE`
+     */
+
+    public static function hasSpecialChars(string $string)
+    {
+        return preg_match("/[^a-zA-Z0-9]/", $string) == 1;
+    }
+
+    /**
+     * Check whether the given string does NOT have special characters.
+     * doesn't contains special character which is character other than the alphanumeric characters
+     *
+     * @param string $string          The string to check
+     * @param bool   $allowWhitespace If `TRUE` then whitespace is allowed
+     *
+     * @return bool `TRUE` if valid otherwise `FALSE`
+     */
+
+    public static function doesntHaveSpecialChars(string $string, bool $allowWhitespace = false)
+    {
+        return self::isAlphanumeric($string, $allowWhitespace);
     }
 
     /**
