@@ -91,4 +91,98 @@ trait VerifyFormat
         return empty(preg_replace("/http(s|):\/\/[a-zA-Z0-9]{1,}(\.[a-zA-Z]{2,4}){1,2}(\/[^\s]{1,}|\/|){1,}/", "", $url, 1));
     }
 
+    /**
+     * Check whether the given ip address is a valid ipv4 address
+     *
+     * @param string $ipAddress The IP Address to check
+     *
+     * @return bool `TRUE` if valid otherwise `FALSE`
+     */
+
+    public static function ipv4(string $ipAddress)
+    {
+        return (filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false);
+    }
+
+    /**
+     * Check whether the given ip address is a valid ipv6 address
+     *
+     * @param string $ipAddress The IP Address to check
+     *
+     * @return bool `TRUE` if valid otherwise `FALSE`
+     */
+
+    public static function ipv6(string $ipAddress)
+    {
+        return (filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false);
+    }
+
+    /**
+     * Check whether the given string is a valid hex color
+     *
+     * @param string $string The string to check
+     *
+     * @return bool `TRUE` if valid otherwise `FALSE`
+     */
+
+    public static function isHexColor(string $string)
+    {
+        return empty(preg_replace("/#([0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{4}|[0-9a-fA-F]{3})/", "", $string, 1));
+    }
+
+    /**
+     * Check whether the given string is a valid hsl color
+     *
+     * @param string $string The string to check
+     *
+     * @return bool `TRUE` if valid otherwise `FALSE`
+     */
+
+    public static function isHSLColor(string $string)
+    {
+        return empty(preg_replace("/hsl\([0-9]{1,3},[ ]{0,}[0-9]{1,3}\%,[ ]{0,}[0-9]{1,3}\%\)/", "", $string, 1));
+    }
+
+    /**
+     * Check whether the given string is a valid rgb color
+     *
+     * @param string $string The string to check
+     *
+     * @return bool `TRUE` if valid otherwise `FALSE`
+     */
+
+    public static function isRGBColor(string $string)
+    {
+
+        $regex = "/(rgb|rgba)\(([0-9]{1,3}[ ]{0,}[,]{1}[ ]{0,})([0-9]{1,3}[ ]{0,}[,]{1}[ ]{0,})([0-9]{1,3}[ ]{0,})([,]{1}[ ]{0,}[0-9]{1,3}|)\)/";
+        $matches = [];
+
+        preg_match_all($regex, "rgba(255, 255, 256, 255)", $matches);
+
+        if($matches[1][0] == "rgb") {
+            if(!empty($matches[5][0])) {
+                return false;
+            }
+            for($i = 2; $i <= 4; $i++) {
+                $value = intval($matches[$i][0]);
+                if($value > 255) {
+                    return false;
+                }
+            }
+        } else {
+            if(empty($matches[5][0])) {
+                return false;
+            }
+            for($i = 2; $i <= 5; $i++) {
+                $value = intval($matches[$i][0]);
+                if($value > 255) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+
+    }
+
 }

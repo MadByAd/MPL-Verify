@@ -32,4 +32,14 @@ final class TestFormatVerification extends TestCase
         $this->assertFalse(Verify::phone("+00011112222333344445555"));
     }
 
+    public function testVerifyIpv4()
+    {
+        $this->assertTrue(Verify::ipv4("255.255.255.255"));
+        $this->assertTrue(Verify::ipv4("192.168.1.10"));
+        $this->assertFalse(Verify::ipv4("386.255.255.255"));
+        $this->assertFalse(Verify::ipv4("255.386.255.255"));
+        $this->assertFalse(Verify::ipv4("255.255.-255.255"));
+        $this->assertFalse(Verify::ipv4("192.168.1"));
+    }
+
 }
